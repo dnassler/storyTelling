@@ -1,0 +1,93 @@
+
+
+<div class="row">
+<div class="addToStory">
+  <div class="basicInfo">
+    <h1>{{story.title}}</h1>
+    <p>{{story.idea}}</p>
+    <p>
+      {{story.tags}}
+    </p>
+    <div class="storyIdeaBy">
+      {{story.userUid}}
+    </div>
+  </div>
+  <div class="storyContent">
+    <div class="storyContentEmpty" ng-show="storyContentEmpty()">
+        This story has not been started yet.
+    </div>
+    <div ng-hide="storyContentEmpty()">
+      <div class="storyContentRepeat" ng-repeat="(storyContentItemId, storyContentItem) in storyContent">
+
+        <div ng-hide="storyContentItemId === editingContentId" class="storyContentItem">
+          <!-- <div class="storyContentItemBy">{{ storyContentItem.userUid }}</div> -->
+
+          <div class="storyContentItemText">
+              <p>{{storyContentItem.text}}</p>
+              <div ng-if="signedIn() && storyContentItem.userUid === currentUser().uid">
+                <ul class="storyListItemLinks">
+                  <li><a ng-click="editStoryContentItem(storyContentItemId, storyContentItem)">edit</a></li>
+                  <li><a ng-click="deleteStoryContentItem(storyContentItemId)">delete</a></li>
+                  <li><a ng-click="branchStory(storyContentItemId)">branch story</a></li>
+                </ul>
+              </div>
+          </div>
+
+          <div class="storyContentItemBy">{{ storyContentItem.userUid }}</div>
+
+        </div>
+
+        <div ng-show="storyContentItemId === editingContentId" class="storyContentItem">
+          <div class="storyContentItemText">
+          <textarea ng-model="storyContentItemEdit.text" class="form-control" rows="3"></textarea>
+          <ul class="storyListItemLinks">
+            <li><a ng-click="storyContentItemEditCommit()">commit changes</a></li>
+            <li><a ng-click="storyContentItemEditCancel()">cancel</a></li>
+          </ul>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <div ng-hide="isStoryFinished()" class="newContentItem">
+
+    <form name="newContentItemForm" ng-submit="saveNewStoryContentItem()">
+
+      <div class="form-group">
+        <label for='nextStoryContentItemText'>Next Story Piece:</label>
+        <textarea rows="3" name='nextStoryContentItemText' class="form-control"
+          placeholder="enter story next story piece here"
+          ng-model="nextStoryContentItem.text"
+          required ></textarea>
+      </div>
+
+      <div class="btn-group btn-group-justified">
+        <div class="btn-group">
+          <button type="submit" class="btn btn-default" ng-disabled="!signedIn()">Save</button>
+        </div>
+        <div class="btn-group">
+          <button type="button" class="btn btn-default" ng-click="cancelStoryContent()">Cancel</button>
+        </div>
+      </div>
+
+
+    </form>
+
+  </div>
+
+  <div ng-show="isStoryFinished()" class="storyFinished">
+      This story is finished.
+  </div>
+
+</div>
+
+<!-- <div class="row"> -->
+<!-- {{ stories | json }} -->
+<!-- </div> -->
+<!-- <p>isSignedIn? {{signedIn()}}</p> -->
+<!-- <p>currentUser: {{currentUser()}}</p> -->
+<!-- <p>currentUser: {{whatIsTheFuckingUser()}}</p> -->
+</div>

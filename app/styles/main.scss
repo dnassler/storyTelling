@@ -1,0 +1,245 @@
+$icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
+
+@import 'bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
+
+// bower:scss
+@import "../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
+// endbower
+
+@import "compass/layout/stretching";
+@import "compass/css3";
+
+@import "compass/utilities";
+
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+/* Space out content a bit */
+body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Custom page header */
+.header {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 40px;
+    padding-bottom: 19px;
+}
+
+/* Custom page footer */
+.footer {
+    padding-top: 19px;
+    color: #777;
+    border-top: 1px solid #e5e5e5;
+}
+
+.container-narrow > hr {
+    margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+    text-align: center;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.jumbotron .btn {
+    font-size: 21px;
+    padding: 14px 24px;
+}
+
+/* Supporting marketing content */
+.marketing {
+    margin: 40px 0;
+}
+
+.marketing p + h4 {
+    margin-top: 28px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+    .container {
+        max-width: 730px;
+    }
+
+    /* Remove the padding we set earlier */
+    .header,
+    .marketing,
+    .footer {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    /* Space out the masthead */
+    .header {
+        margin-bottom: 30px;
+    }
+    /* Remove the bottom border on the jumbotron for visual effect */
+    .jumbotron {
+        border-bottom: 0;
+    }
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+       display: none !important;
+  }
+
+.animateMainView.ng-enter,
+.animateMainView.ng-leave {
+  transition: 2s linear all;
+  -webkit-transition: 2s linear all;
+}
+.animateMainView.ng-enter {
+  opacity: 0;
+  // color: #9cb7e2;
+}
+.animateMainView.ng-enter.ng-enter-active {
+  opacity: 1;
+  // color: black;
+}
+.animateMainView.ng-leave {}
+.animateMainView.ng-leave.ng-leave-active {
+  opacity: 0;
+}
+
+
+.storyContentRepeat.ng-enter,
+.storyContentRepeat.ng-leave {
+  transition: .5s linear all;
+  -webkit-transition: .5s linear all;
+}
+.storyContentRepeat.ng-enter {
+  opacity: 0;
+  // color: #9cb7e2;
+}
+.storyContentRepeat.ng-enter.ng-enter-active {
+  opacity: 1;
+  // color: black;
+}
+.storyContentRepeat.ng-leave {
+}
+.storyContentRepeat.ng-leave.ng-leave-active {
+  opacity: 0;
+}
+
+
+.storyListItem {
+  background-color: #bac8c4;
+  padding: 20px;
+  margin: 20px;
+  @include border-radius(25px);
+}
+.storyListItemLinks {
+  margin-left: 0;
+  padding-left: 0;
+}
+.storyListItemLinks li {
+  color: rgba(0, 0, 0, 0.74);
+  list-style-type: none;
+  display: inline;
+  padding-right: 20px;
+  // padding-left: 0px;
+  // margin-left: 0px;
+}
+.addToStory {
+  background-color: #c2cbdc;
+  padding: 20px;
+  @include border-radius(25px);
+}
+.basicInfo {
+  background-color: #9cb7e2;
+  padding: 20px;
+  overflow: auto;
+
+}
+.storyIdeaBy {
+  // width:10%;
+  float: right;
+  padding:5px;
+  //margin: 5px 0 20px 5px;
+  margin: 0px 0 0px 0px;
+  background-color: #67778b;
+  color: #ffffff;
+  //@include border-radius(5px);
+
+  // overflow: hidden;
+
+  //@include inline-block;
+  //margin:10px 0px 10px 0px;
+  //@include display-box;
+  //@include box-align(stretch);
+  //@include stretch-y;
+}
+
+.storyContent {
+  padding:20px 0px 20px 0px;
+}
+
+.storyContentItem {
+  //padding:20px;
+  background-color: #d3dbea;
+  margin:10px 0px 10px 0px;
+  overflow: auto;
+  //width: 100%
+}
+.storyContentItem:hover {
+  background-color: #e7edf8;
+}
+.storyContentItemText {
+  padding:10px 10px 0px 10px;
+  //background-color: #d3dbea;
+  //margin:10px 0px 10px 0px;
+}
+
+.storyContentEmpty {
+  background-color: #343535;
+  color: white;
+  padding:10px;
+  text-align: center;
+}
+
+.storyFinished {
+  background-color: #343535;
+  color: white;
+  padding:10px;
+  text-align: center;
+}
+
+
+.storyContentItemBy {
+  // width:10%;
+  float: right;
+  padding:5px;
+  //margin: 5px 0 20px 5px;
+  margin: 0px 0 0px 0px;
+  background-color: #67778b;
+  color: #ffffff;
+  //@include border-radius(5px);
+
+  // overflow: hidden;
+
+  //@include inline-block;
+  //margin:10px 0px 10px 0px;
+  //@include display-box;
+  //@include box-align(stretch);
+  //@include stretch-y;
+}

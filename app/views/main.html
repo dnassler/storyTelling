@@ -1,0 +1,35 @@
+
+<!-- <div class="row"> -->
+<!-- {{ stories | json }} -->
+<!-- </div> -->
+<!-- <p>isSignedIn? {{signedIn()}}</p> -->
+<!-- <p>currentUser: {{currentUser()}}</p> -->
+<!-- <p>currentUser: {{whatIsTheFuckingUser()}}</p> -->
+
+<div class="row">
+  <input type="text" class="form-control" ng-model="searchStories" />
+</div>
+
+<div class="row">
+<div id="storiesDiv">
+  <!-- <ul ng-repeat="storyItem in stories">
+    <li>{{storyItem.title}}: {{storyItem.idea}}</li>
+  </ul> -->
+<div class="storyListItem" ng-repeat="storyItem in stories | orderByPriority | filter:{title:searchStories} | orderBy:'$id':true" >
+<h2>{{storyItem.title}}</h2>
+<p>
+  {{storyItem.idea}}
+</p>
+<ul class="storyListItemLinks">
+  <li><a ng-click="storyClicked(storyItem.$id)">view</a></li>
+  <li><a ng-show="signedIn() && storyItem.userUid === currentUser().uid" ng-click="deleteStory(storyItem.$id)">delete</a></li>
+  <!-- <li><a ng-click="storyClicked(storyId)">view</a></li>
+  <li><a ng-show="isOwner(storyId)" ng-click="deleteStory(storyId)">delete</a></li> -->
+</ul>
+</div>
+
+
+
+
+</div>
+</div>

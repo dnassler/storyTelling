@@ -1,0 +1,67 @@
+<div class="row">
+<div class="panel panel-default">
+<div class="panel-body">
+
+<form name="storyBasicInfo" ng-submit="saveStoryIdea()">
+
+<div class="form-group">
+  <label for='title'>Story Title:</label>
+  <input type="text" id='title' name='title' class="form-control"
+    placeholder="enter story title here"
+    ng-model="story.title"
+    ui-event="{ focus: 'onTitleFocus()', blur: 'onTitleBlur()', keypress: 'keyEvent($event)'}"
+    required />
+</div>
+
+
+<div class="form-group">
+<label for="idea">Idea or Theme:</label>
+<textarea class="form-control" rows="3"
+  id="idea" name="idea"
+  placeholder="enter some description of the idea or theme for this story"
+  ng-model="story.idea"
+  ui-event="{focus: 'onStoryIdeaFocus()', blur: 'onStoryIdeaBlur()'}"
+  required >
+</textarea>
+</div>
+
+<div class="form-group">
+  <label for="tags">Tags:</label>
+  <input type="text" id="tags" name="tags"
+    ng-model="story.tags"
+    class="form-control"
+    placeholder="enter tags using twitter-like syntax (e.g. #summerDay)"/>
+</div>
+
+
+<div class="btn-group btn-group-justified">
+<div class="btn-group">
+  <button type="submit" class="btn btn-default" ng-disabled="!signedIn()">Save</button>
+</div>
+<div class="btn-group">
+  <button type="button" class="btn btn-default" ng-click="cancelStory()">Cancel</button>
+</div>
+</div>
+
+
+</form>
+</div>
+</div>
+
+<!-- <div class="row"> -->
+<!-- {{ stories | json }} -->
+<!-- </div> -->
+<!-- <p>isSignedIn? {{signedIn()}}</p> -->
+<!-- <p>currentUser: {{currentUser()}}</p> -->
+<!-- <p>currentUser: {{whatIsTheFuckingUser()}}</p> -->
+
+<!--
+<div class="row">
+<div id="storiesDiv">
+  <ul ng-repeat="storyItem in stories">
+    <li>{{storyItem.title}}: {{storyItem.idea}}</li>
+  </ul>
+</div>
+
+</div> -->
+</div>
