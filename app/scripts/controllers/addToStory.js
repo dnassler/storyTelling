@@ -36,8 +36,8 @@ angular.module('storyApp')
     $scope.editingContentId = storyContentItemId;
     $scope.storyContentItemEdit = {text: storyContentItem.text};//angular.copy( storyContentItem );
   };
-  $scope.branchStory( storyContentItemId ) {
-    //$scope.currentBranch = StoryService.newStoryBranch( $scope.story, storyContentItemId );
+  $scope.branchStory = function( storyContentItemId ) {
+    $scope.currentBranch = StoryService.newStoryBranch( $scope.story, storyContentItemId );
   };
   $scope.storyContentItemEditCommit = function() {
     StoryService.saveContentItem( $scope.story, $scope.editingContentId, $scope.storyContentItemEdit);
