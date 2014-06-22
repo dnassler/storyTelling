@@ -5,7 +5,7 @@ angular.module('storyApp')
     //var storiesRef = firebaseRef('stories');
     var storiesSync = syncData('stories');
     //var _storyItem;
-    return {
+    var factory = {
       //storiesRef: storiesRef,
       // isStoryNameUnique : function (name) {
       //   //firebaseRef.once('value', function(dataSnapshot) { /* handle read data. */ });
@@ -24,6 +24,9 @@ angular.module('storyApp')
           console.log('ref.name()='+ref.name());
           //console.log('ref = ', $filter('json').(ref));
         });
+      },
+      updateStoryInfo: function(storyId, storyInfo) {
+        storiesSync.$child(storyId).$update(storyInfo);
       },
       addStoryContentItem: function( story, contentItem ) {
         var user = simpleLogin.currentUser();
@@ -60,6 +63,18 @@ angular.module('storyApp')
         var story = storiesSync.$child(storyId);
         console.log('deleteStory: story.title=',story.title);
         story.$remove();
+      },
+      isFinished: function( story ) {
+        // if ( story.content ) {
+        //   console.log('isFinished: ', Object.keys(story.content).length );
+        // }
+        if ( story.content && Object.keys(story.content).length === 5 ) {
+          return true;
+        }
+        return false;
+      },
+      isInProgress: function( story ) {
+        return !factory.isFinished( story );
       }
 
       // setStoryItem: function(storyItem) {
@@ -69,5 +84,7 @@ angular.module('storyApp')
       //   return _storyItem;
       // }
     };
+
+    return factory;
 
   });

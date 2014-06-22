@@ -107,4 +107,48 @@ angular.module('storyApp')
       StoryService.deleteStory( storyId );
     };
 
+    $scope.searchBy = 'title';
+    $scope.filterBy = 'myStories';
+    $scope.storyStatus = 'inProgress';
+
+    $scope.searchStoriesPlaceholder = function() {
+      if ( $scope.searchBy === 'title' ) {
+        return 'search by title';
+      }
+      return 'search by tags';
+    };
+    $scope.searchByFilter = function( story ) {
+      if ( $scope.searchBy === 'title' ) {
+        return story.title.toLowerCase().indexOf( $scope.searchStories.toLowerCase() ) !== -1;
+      } else {
+        // by tag
+        return story.tags.toLowerCase().indexOf( $scope.searchStories.toLowerCase() ) !== -1;
+      }
+    };
+    $scope.storyFilter2 = function( story ) {
+      if ( $scope.filterBy === 'myStories' ) {
+        return $rootScope.currentUser().uid === story.userUid;
+      } else if ( $scope.filterBy === 'participated' ) {
+        var found = false;
+        angular.forEach( story.content, function(contentItem) {
+          if ( contentItem.userUid === $rootScope.currentUser().uid ) {
+            found = true;
+          }
+        });
+        return found;
+      } else if ( $scope.filterBy === 'allStories' ) {
+        return true;
+      } else if ( $scope.filterBy === 'storiesForMe' ) {
+        return false;
+      }
+    };
+    $scope.storyFilterStatus = function( story ) {
+      if ( $scope.storyStatus === 'finishedOnly' ) {
+        return StoryService.isFinished( story );
+      } else {
+        // inProgress
+        return StoryService.isInProgress( story );
+      }
+    };
+
   });

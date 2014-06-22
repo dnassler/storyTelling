@@ -7,6 +7,8 @@ angular.module('storyApp')
   console.log('$stateParams.storyId:',$stateParams.storyId);
   // console.log(StoryService.getStory( storyId ));
   //$scope.story = StoryService.getStoryItem();
+  var storyId = $stateParams.storyId;
+
   $scope.story = StoryService.getStory( $stateParams.storyId );
   //$scope.story.title = $stateParams.storyTitle;
   $scope.nextStoryContentItem = {text: ''};
@@ -18,6 +20,23 @@ angular.module('storyApp')
   $scope.cancelStoryContent = function() {
     $state.go('main');
   };
+
+  $scope.editStory = function() {
+    $scope.isEditingStoryInfo = true;
+    $scope.storyInfoEdit = {title:$scope.story.title, idea:$scope.story.idea, tags:$scope.story.tags};
+  };
+  $scope.deleteStory = function() {
+    $scope.story.$remove();
+    $state.go('main');
+  };
+  $scope.commitStoryInfoChanges = function() {
+    StoryService.updateStoryInfo( storyId, $scope.storyInfoEdit );
+    $scope.isEditingStoryInfo = false;
+  };
+  $scope.cancelStoryInfoChanges = function() {
+    $scope.isEditingStoryInfo = false;
+  };
+
   $scope.storyContentEmpty = function() {
     var keys = $scope.storyContent.$getIndex();
     console.log('keys.length = ',keys.length);

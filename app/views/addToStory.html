@@ -3,13 +3,81 @@
 <div class="row">
 <div class="addToStory">
   <div class="basicInfo">
-    <h1>{{story.title}}</h1>
-    <p>{{story.idea}}</p>
-    <p>
-      {{story.tags}}
-    </p>
+
+    <!-- <div ng-hide="isEditingStoryInfo" class="editingStoryInfo">
+      <h1>{{story.title}}</h1>
+      <p>{{story.idea}}</p>
+      <p>
+        {{story.tags}}
+      </p>
+    </div> -->
+
+    <div ng-switch="isEditingStoryInfo" >
+      <div ng-switch-when="true" >
+
+        <div class="form-group">
+          <label for='title'>Story Title:</label>
+          <input type="text" id='title' name='title' class="form-control"
+            placeholder="enter story title here"
+            ng-model="storyInfoEdit.title"
+            required />
+        </div>
+
+
+        <div class="form-group">
+          <label for="idea">Idea or Theme:</label>
+          <textarea class="form-control" rows="3"
+            id="idea" name="idea"
+            placeholder="enter some description of the idea or theme for this story"
+            ng-model="storyInfoEdit.idea"
+            required >
+          </textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="tags">Tags:</label>
+          <input type="text" id="tags" name="tags"
+            ng-model="storyInfoEdit.tags"
+            class="form-control"
+            placeholder="enter tags using twitter-like syntax (e.g. #summerDay)"/>
+        </div>
+
+      </div>
+      <div ng-switch-default >
+
+        <h1>{{story.title}}</h1>
+        <p>{{story.idea}}</p>
+        <p>
+          {{story.tags}}
+        </p>
+
+      </div>
+    </div>
+
+    <!-- <div ng-show="isEditingStoryInfo" class="editingStoryInfo0">
+    </div> -->
+
     <div class="storyIdeaBy">
       {{story.userUid}}
+    </div>
+    <div class="storyListItemLinks">
+      <div ng-if="signedIn() && story.userUid === currentUser().uid">
+
+        <div ng-hide="isEditingStoryInfo">
+          <ul class="storyListItemLinks">
+            <li><a ng-click="editStory()">edit</a></li>
+            <li><a ng-click="deleteStory()">delete</a></li>
+          </ul>
+        </div>
+
+        <div ng-show="isEditingStoryInfo">
+          <ul class="storyListItemLinks">
+            <li><a ng-click="commitStoryInfoChanges()">commit changes</a></li>
+            <li><a ng-click="cancelStoryInfoChanges()">cancel</a></li>
+          </ul>
+        </div>
+
+      </div>
     </div>
   </div>
   <div class="storyContent">
