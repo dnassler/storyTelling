@@ -1,13 +1,14 @@
 'use strict';
 
 angular.module('storyApp')
-  .controller('NewStoryController', function ($scope, StoryService, $state) {
+  .controller('NewStoryController', function ($scope, StoryService, $state, TagsService, UserService) {
 
     $scope.story = {
       title: '',
       idea: '',
       tags: ''
     };
+    var story = $scope.story;
 
     $scope.onStoryTitleClick = function() {
       console.log('onStoryTitleClick');
@@ -89,5 +90,44 @@ angular.module('storyApp')
     //   // return StoryService.signedIn();
     //   return $rootScope.signedIn();
     // };
+
+    $scope.userSelected = undefined;
+    $scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida',
+      'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland',
+      'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
+      'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania',
+      'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
+      'West Virginia', 'Wisconsin', 'Wyoming'];
+
+    $scope.inputTags = undefined;
+    $scope.loadTags = function( query ) {
+      // return TagsService.getTagsMatching( query );
+      console.log('query = ', query);
+      return TagsService.getTagsMatching(query);
+    };
+
+    $scope.$watchCollection('inputTags', function(
+      newInputTags ) {
+        //oldInputTags, scope
+        var tags = {};
+        angular.forEach( newInputTags, function( inputTag ) {
+          tags[inputTag.text] = inputTag.text;
+        });
+        story.tags = tags;
+      });
+
+    $scope.inputInvitedUsers = undefined;
+    $scope.loadUserList = function( query ) {
+      return UserService.userList( query ); // returns a promise to get an array of strings corresponding to users in the system
+    };
+
+    $scope.$watchCollection('inputInvitedUsers', function(
+      newInputInvitedUsers ) {
+        var invitedUsers = {};
+        angular.forEach( newInputInvitedUsers, function( inputUser ) {
+          invitedUsers[inputUser.userId] = inputUser.text;
+        });
+        story.invitedUsers = invitedUsers;
+      });
 
   });

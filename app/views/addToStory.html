@@ -34,21 +34,55 @@
           </textarea>
         </div>
 
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label for="tags">Tags:</label>
           <input type="text" id="tags" name="tags"
             ng-model="storyInfoEdit.tags"
             class="form-control"
             placeholder="enter tags using twitter-like syntax (e.g. #summerDay)"/>
+        </div> -->
+
+        <div class="form-group">
+          <label for="tags">Tags:</label>
+          <tags-input name="tags" ng-model="inputTags" class="bootstrapTagInput" add-on-space=true add-from-autocomplete-only=false>
+            <auto-complete source="loadTags($query)" min-length=1></auto-complete>
+          </tags-input>
+          <!-- <pre>Model: {{inputTags | json}}</pre>
+          <pre>Story Model: {{storyInfoEdit.tags}}</pre> -->
+        </div>
+
+        <div class="form-group">
+          <label for="invitedUsers">Invited Users:</label>
+          <tags-input name="invitedUsers" ng-model="inputInvitedUsers"
+              class="bootstrapTagInput" placeholder="Invite a user"
+              add-from-autocomplete-only=true
+              replace-spaces-with-dashes=false >
+            <auto-complete source="loadUserList($query)" min-length=1></auto-complete>
+          </tags-input>
+          <pre>Model: {{inputInvitedUsers | json}}</pre>
+        </div>
+
+        <div class="form-group">
+          <label for="openToAnyoneFlag">Open to anyone: </label>
+          <input type="checkbox" ng-model="openToAnyoneFlag">
         </div>
 
       </div>
       <div ng-switch-default >
 
+<div class="storyIdeaBy">
+  <!-- {{story.userUid}} -->
+  <div ng-if="userAvatarURL(story.userUid)"><img ng-src="{{userAvatarURL(story.userUid)}}"/></div>
+  <div>{{userDisplayName(story.userUid)}}</div>
+</div>
+
         <h1>{{story.title}}</h1>
         <p>{{story.idea}}</p>
         <p>
-          {{story.tags}}
+          {{storyTagsForReadOnlyDisplay()}}
+        </p>
+        <p>
+          {{invitedUsersReadOnlyDisplay()}}
         </p>
 
       </div>
@@ -57,9 +91,6 @@
     <!-- <div ng-show="isEditingStoryInfo" class="editingStoryInfo0">
     </div> -->
 
-    <div class="storyIdeaBy">
-      {{story.userUid}}
-    </div>
     <div class="storyListItemLinks">
       <div ng-if="signedIn() && story.userUid === currentUser().uid">
 
@@ -90,18 +121,22 @@
         <div ng-hide="storyContentItemId === editingContentId" class="storyContentItem">
           <!-- <div class="storyContentItemBy">{{ storyContentItem.userUid }}</div> -->
 
+          <div class="storyContentItemBy">
+            <!-- {{ storyContentItem.userUid }} -->
+            <div ng-if="userAvatarURL(storyContentItem.userUid)"><img ng-src="{{userAvatarURL(storyContentItem.userUid)}}"/></div>
+            <div>{{userDisplayName(storyContentItem.userUid)}}</div>
+          </div>
+
           <div class="storyContentItemText">
               <p>{{storyContentItem.text}}</p>
               <div ng-if="signedIn() && storyContentItem.userUid === currentUser().uid">
                 <ul class="storyListItemLinks">
                   <li><a ng-click="editStoryContentItem(storyContentItemId, storyContentItem)">edit</a></li>
                   <li><a ng-click="deleteStoryContentItem(storyContentItemId)">delete</a></li>
-                  <li><a ng-click="branchStory(storyContentItemId)">branch story</a></li>
+                  <!-- <li><a ng-click="branchStory(storyContentItemId)">branch story</a></li> -->
                 </ul>
               </div>
           </div>
-
-          <div class="storyContentItemBy">{{ storyContentItem.userUid }}</div>
 
         </div>
 

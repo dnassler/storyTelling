@@ -25,14 +25,42 @@
 </textarea>
 </div>
 
-<div class="form-group">
+<!-- <div class="form-group">
   <label for="tags">Tags:</label>
   <input type="text" id="tags" name="tags"
     ng-model="story.tags"
     class="form-control"
     placeholder="enter tags using twitter-like syntax (e.g. #summerDay)"/>
+</div> -->
+
+<!-- <div class="form-group">
+  <input type="text" name="userSelected" ng-model="userSelected" typeahead="state for state in states | filter:$viewValue | limitTo:8" class="form-control" typeahead-append-to-body=false>
+  <pre>Model: {{userSelected | json}}</pre>
+</div> -->
+
+<div class="form-group">
+  <tags-input ng-model="inputTags" class="bootstrapTagInput" add-on-space=true add-from-autocomplete-only=false>
+    <auto-complete source="loadTags($query)" min-length=1></auto-complete>
+  </tags-input>
+  <!-- <pre>Model: {{inputTags | json}}</pre>
+  <pre>Story Model: {{story.tags}}</pre> -->
 </div>
 
+<div class="form-group">
+  <tags-input ng-model="inputInvitedUsers" class="bootstrapTagInput" placeholder="Invite a user"
+    add-from-autocomplete-only=true
+    replace-spaces-with-dashes=false >
+
+    <auto-complete source="loadUserList($query)" min-length=1></auto-complete>
+
+  </tags-input>
+  <!-- <pre>Model: {{inputInvitedUsers | json}}</pre> -->
+</div>
+
+<div class="form-group">
+  <label for="openToAnyoneFlag">Open to anyone: </label>
+  <input type="checkbox" ng-model="openToAnyoneFlag">
+</div>
 
 <div class="btn-group btn-group-justified">
 <div class="btn-group">

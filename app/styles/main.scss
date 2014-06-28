@@ -103,10 +103,19 @@ body {
        display: none !important;
   }
 
+
+.mainViewContainer {
+  position: relative;
+}
 .animateMainView.ng-enter,
 .animateMainView.ng-leave {
   transition: 2s linear all;
   -webkit-transition: 2s linear all;
+  background: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 .animateMainView.ng-enter {
   opacity: 0;
@@ -123,23 +132,29 @@ body {
 
 
 .storyContentRepeat.ng-enter,
-.storyContentRepeat.ng-leave {
+.storyContentRepeat.ng-leave,
+.storyContentRepeat.ng-move {
   transition: .5s linear all;
   -webkit-transition: .5s linear all;
 }
-.storyContentRepeat.ng-enter {
+.storyContentRepeat.ng-enter,
+.storyContentRepeat.ng-move {
   opacity: 0;
   // color: #9cb7e2;
 }
+.storyContentRepeat.ng-move.ng-enter-active,
 .storyContentRepeat.ng-enter.ng-enter-active {
   opacity: 1;
   // color: black;
 }
 .storyContentRepeat.ng-leave {
+  opacity: 1;
+
 }
 .storyContentRepeat.ng-leave.ng-leave-active {
   opacity: 0;
 }
+
 
 .editingStoryInfo.ng-hide-add,
 .editingStoryInfo.ng-hide-remove {
@@ -194,11 +209,11 @@ body {
 .storyIdeaBy {
   // width:10%;
   float: right;
-  padding:5px;
+  //padding:5px;
   //margin: 5px 0 20px 5px;
   margin: 0px 0 0px 0px;
-  background-color: #67778b;
-  color: #ffffff;
+  //background-color: #67778b;
+  color: #000;
   //@include border-radius(5px);
 
   // overflow: hidden;
@@ -248,11 +263,11 @@ body {
 .storyContentItemBy {
   // width:10%;
   float: right;
-  padding:5px;
+  //padding:5px;
   //margin: 5px 0 20px 5px;
   margin: 0px 0 0px 0px;
-  background-color: #67778b;
-  color: #ffffff;
+  //background-color: #67778b;
+  color: #000;
   //@include border-radius(5px);
 
   // overflow: hidden;
@@ -266,4 +281,20 @@ body {
 
 .filterOptions {
   margin-top: 10px;
+}
+
+.bootstrapTagInput .tags .tag-item {
+  margin: 2px;
+  padding: 0 5px;
+  display: inline-block;
+  float: left;
+  font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  height: 26px;
+  line-height: 25px;
+  border: 1px solid #acacac;
+  background: #428bca;
+  color: #fff;
+  border-radius: 4px;
+  //background: -webkit-linear-gradient(top, #f0f9ff 0%, #cbebff 47%, #a1dbff 100%);
+  //background: linear-gradient(to bottom, #f0f9ff 0%, #cbebff 47%, #a1dbff 100%);
 }

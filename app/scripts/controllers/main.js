@@ -19,6 +19,8 @@ angular.module('storyApp')
       tags: ''
     };
 
+    $scope.storySearchFields = StoryService.searchFields;
+
     $scope.onStoryTitleClick = function() {
       console.log('onStoryTitleClick');
       if ( !$scope.story.showTitleInput ) {
@@ -107,43 +109,44 @@ angular.module('storyApp')
       StoryService.deleteStory( storyId );
     };
 
-    $scope.searchBy = 'title';
-    $scope.filterBy = 'myStories';
-    $scope.storyStatus = 'inProgress';
+    // $scope.searchBy = 'title';
+    // $scope.filterBy = 'myStories';
+    // $scope.storyStatus = 'inProgress';
 
     $scope.searchStoriesPlaceholder = function() {
-      if ( $scope.searchBy === 'title' ) {
+      if ( $scope.storySearchFields.searchBy === 'title' ) {
         return 'search by title';
       }
       return 'search by tags';
     };
     $scope.searchByFilter = function( story ) {
-      if ( $scope.searchBy === 'title' ) {
-        return story.title.toLowerCase().indexOf( $scope.searchStories.toLowerCase() ) !== -1;
+      if ( $scope.storySearchFields.searchBy === 'title' ) {
+        return story.title.toLowerCase().indexOf( $scope.storySearchFields.searchStories.toLowerCase() ) !== -1;
       } else {
         // by tag
-        return story.tags.toLowerCase().indexOf( $scope.searchStories.toLowerCase() ) !== -1;
+        return story.tags.toLowerCase().indexOf( $scope.storySearchFields.searchStories.toLowerCase() ) !== -1;
       }
     };
     $scope.storyFilter2 = function( story ) {
-      if ( $scope.filterBy === 'myStories' ) {
-        return $rootScope.currentUser().uid === story.userUid;
-      } else if ( $scope.filterBy === 'participated' ) {
+      var user = $rootScope.currentUser();
+      if ( $scope.storySearchFields.filterBy === 'myStories' ) {
+        return user && user.uid === story.userUid;
+      } else if ( $scope.storySearchFields.filterBy === 'participated' ) {
         var found = false;
         angular.forEach( story.content, function(contentItem) {
-          if ( contentItem.userUid === $rootScope.currentUser().uid ) {
+          if ( user && user.uid === contentItem.userUid ) {
             found = true;
           }
         });
         return found;
-      } else if ( $scope.filterBy === 'allStories' ) {
+      } else if ( $scope.storySearchFields.filterBy === 'allStories' ) {
         return true;
-      } else if ( $scope.filterBy === 'storiesForMe' ) {
+      } else if ( $scope.storySearchFields.filterBy === 'storiesForMe' ) {
         return false;
       }
     };
     $scope.storyFilterStatus = function( story ) {
-      if ( $scope.storyStatus === 'finishedOnly' ) {
+      if ( $scope.storySearchFields.storyStatus === 'finishedOnly' ) {
         return StoryService.isFinished( story );
       } else {
         // inProgress

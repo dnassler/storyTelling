@@ -21,7 +21,7 @@ angular.module('storyApp')
         $scope.err = err? err + '' : null;
         if ( !err ) {
           console.log('*****************2');
-          $state.go('main');
+          $state.go('inbox');
         }
       });
     };
@@ -68,10 +68,12 @@ angular.module('storyApp')
           }
           else {
             // must be logged in before I can write to my profile
-            $scope.login(function() {
-              simpleLogin.createProfile(user.uid, user.email);
-              $location.path('/account');
-            });
+            //$scope.login(function() {
+            //   simpleLogin.createProfile(user.uid, user.email);
+            //   $location.path('/account');
+            // });
+            simpleLogin.createProfile(user.uid, user.email);
+            $state.go('main');
           }
         });
       }

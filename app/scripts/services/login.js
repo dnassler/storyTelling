@@ -39,12 +39,16 @@ angular.module('angularfire.login', ['firebase', 'angularfire.firebase'])
       login: function(provider, callback) {
         assertAuth();
         auth.$login(provider, {rememberMe: true}).then(function(user) {
+
+          profileCreator.oauthLogin( user ); // create a profile only if necessary in the /users location
+
           if( callback ) {
             //todo-bug https://github.com/firebase/angularFire/issues/199
             $timeout(function() {
               callback(null, user);
             });
           }
+
           //$rootScope.currentUser = user;
         }, callback);
       },
@@ -90,10 +94,13 @@ angular.module('angularfire.login', ['firebase', 'angularfire.firebase'])
 
       createAccount: function(email, pass, callback) {
         assertAuth();
-        auth.$createUser(email, pass).then(function(user) { callback(null, user); }, callback);
+        auth.$createUser(email, pass).then(
+          function(user) {
+            callback(null, user);
+          }, callback);
       },
 
-      createProfile: profileCreator,
+      createProfile: profileCreator.passwordLogin,
 
       currentUser: function() {
         console.log('currentUser:');
@@ -106,28 +113,48 @@ angular.module('angularfire.login', ['firebase', 'angularfire.firebase'])
       }
     };
   })
+  .factory('profileCreator', function(firebaseRef, syncData, $timeout) {
+    return {
 
-  .factory('profileCreator', function(firebaseRef, $timeout) {
-    return function(id, email, callback) {
-      function firstPartOfEmail(email) {
-        return ucfirst(email.substr(0, email.indexOf('@'))||'');
-      }
+      oauthLogin: function( user ) {
 
-      function ucfirst (str) {
-        // credits: http://kevin.vanzonneveld.net
-        str += '';
-        var f = str.charAt(0).toUpperCase();
-        return f + str.substr(1);
-      }
+        var users = syncData('users');
+        users.$child(user.uid).$update(user);
 
-      firebaseRef('users/'+id).set({email: email, name: firstPartOfEmail(email)}, function(err) {
-        //err && console.error(err);
-        if( callback ) {
-          $timeout(function() {
-            callback(err);
-          });
+        // firebaseRef('users/'+user.uid).set(user, function(err) {
+        //   //err && console.error(err);
+        //   if( callback ) {
+        //     $timeout(function() {
+        //       callback(err);
+        //     });
+        //   }
+        // });
+
+      },
+
+      passwordLogin: function(id, email, callback) {
+
+        function firstPartOfEmail(email) {
+          return ucfirst(email.substr(0, email.indexOf('@'))||'');
         }
-      });
+
+        function ucfirst (str) {
+          // credits: http://kevin.vanzonneveld.net
+          str += '';
+          var f = str.charAt(0).toUpperCase();
+          return f + str.substr(1);
+        }
+
+        firebaseRef('users/'+id).set({email: email, name: firstPartOfEmail(email)}, function(err) {
+          //err && console.error(err);
+          if( callback ) {
+            $timeout(function() {
+              callback(err);
+            });
+          }
+        });
+      }
+
     };
 
   });

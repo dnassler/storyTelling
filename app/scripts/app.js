@@ -11,10 +11,17 @@ angular
     'simpleLoginTools',
     'ui.event',
     'ui.router',
-    'ngAnimate'
+    'ngAnimate',
+    'ui.bootstrap',
+    'ngTagsInput'
   ])
   .config(function ($stateProvider) {
     $stateProvider
+      .state('inbox', {
+        templateUrl: 'views/inbox.html',
+        url: '/inbox',
+        controller: 'InboxController'
+      })
       .state('main', {
         templateUrl: 'views/main.html',
         url: '/',

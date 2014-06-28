@@ -16,6 +16,7 @@
     <!-- build:css({.tmp,app}) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
+    <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.css">
   </head>
   <body ng-app="storyApp">
     <!--[if lt IE 7]>
@@ -24,7 +25,14 @@
 
     <!-- Add your site or application content here -->
     <div ng-include="'views/nav.html'"></div>
-    <div class="container" ui-view=""></div>
+
+    <div class="container">
+
+      <div class="mainViewContainer">
+        <div class="animateMainView" ui-view="" ></div>
+      </div>
+
+    </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -72,14 +80,20 @@
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script src="bower_components/ng-tags-input/ng-tags-input.js"></script>
+
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/inboxController.js"></script>
     <script src="scripts/controllers/newStory.js"></script>
     <script src="scripts/controllers/addToStory.js"></script>
     <script src="scripts/angularfire/config.js"></script>
     <script src="scripts/services/firebase.js"></script>
     <script src="scripts/services/login.js"></script>
     <script src="scripts/services/storyService.js"></script>
+    <script src="scripts/services/userService.js"></script>
+    <script src="scripts/services/tagsService.js"></script>
     <script src="scripts/angularfire/simpleLoginTools.js"></script>
     <script src="scripts/angularfire/routesecurity.js"></script>
     <script src="scripts/controllers/login.js"></script>

@@ -7,22 +7,21 @@
 <!-- <p>currentUser: {{whatIsTheFuckingUser()}}</p> -->
 
 <div class="row">
-  <input type="text" class="form-control" ng-model="searchStories" placeholder="{{searchStoriesPlaceholder()}}"/>
+  <input type="text" class="form-control" ng-model="storySearchFields.searchStories" placeholder="{{searchStoriesPlaceholder()}}"/>
 </div>
 <div class="row filterOptions">
   <div class="col-sm-4">
-    <input type="radio" name="searchBy" ng-model="searchBy" value="title">  Search By Title<br/>
-    <input type="radio" name="searchBy" ng-model="searchBy" value="tags">  Search Tags<br/>
+    <input type="radio" name="searchBy" ng-model="storySearchFields.searchBy" value="title">  Search By Title<br/>
+    <input type="radio" name="searchBy" ng-model="storySearchFields.searchBy" value="tags">  Search Tags<br/>
   </div>
   <div class="col-sm-4">
-    <input type="radio" name="filterBy" ng-model="filterBy" value="myStories" >  My Stories<br/>
-    <input type="radio" name="filterBy" ng-model="filterBy" value="participated" >  Stories Participated In<br/>
-    <input type="radio" name="filterBy" ng-model="filterBy" value="allStories" >  All Stories<br/>
-    <input type="radio" name="filterBy" ng-model="filterBy" value="storiesForMe">  Stories To Continue<br/>
+    <input type="radio" name="filterBy" ng-model="storySearchFields.filterBy" value="allStories" >  All Stories<br/>
+    <input type="radio" name="filterBy" ng-model="storySearchFields.filterBy" value="myStories" >  My Stories<br/>
+    <input type="radio" name="filterBy" ng-model="storySearchFields.filterBy" value="participated" >  Stories Participated In<br/>
   </div>
   <div class="col-sm-4">
-    <input type="radio" name="storyStatus" ng-model="storyStatus" value="finishedOnly" >  Finished Stories Only<br/>
-    <input type="radio" name="storyStatus" ng-model="storyStatus" value="inProgress" >  Stories In Progress<br/>
+    <input type="radio" name="storyStatus" ng-model="storySearchFields.storyStatus" value="finishedOnly" >  Finished Stories Only<br/>
+    <input type="radio" name="storyStatus" ng-model="storySearchFields.storyStatus" value="inProgress" >  Stories In Progress<br/>
   </div>
 </div>
 
