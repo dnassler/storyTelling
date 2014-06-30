@@ -16,7 +16,7 @@
       <div ng-switch-when="true" >
 
         <div class="form-group">
-          <label for='title'>Story Title:</label>
+          <h1><label for='title'>Story Title:</label></h1>
           <input type="text" id='title' name='title' class="form-control"
             placeholder="enter story title here"
             ng-model="storyInfoEdit.title"
@@ -25,7 +25,7 @@
 
 
         <div class="form-group">
-          <label for="idea">Idea or Theme:</label>
+          <h4><label for="idea">Idea or Theme:</label></h4>
           <textarea class="form-control" rows="3"
             id="idea" name="idea"
             placeholder="enter some description of the idea or theme for this story"
@@ -43,7 +43,7 @@
         </div> -->
 
         <div class="form-group">
-          <label for="tags">Tags:</label>
+          <h4><label for="tags">Tags:</label></h4>
           <tags-input name="tags" ng-model="inputTags" class="bootstrapTagInput" add-on-space=true add-from-autocomplete-only=false>
             <auto-complete source="loadTags($query)" min-length=1></auto-complete>
           </tags-input>
@@ -52,19 +52,19 @@
         </div>
 
         <div class="form-group">
-          <label for="invitedUsers">Invited Users:</label>
+          <h4><label for="invitedUsers">Invited Users:</label></h4>
           <tags-input name="invitedUsers" ng-model="inputInvitedUsers"
               class="bootstrapTagInput" placeholder="Invite a user"
               add-from-autocomplete-only=true
               replace-spaces-with-dashes=false >
             <auto-complete source="loadUserList($query)" min-length=1></auto-complete>
           </tags-input>
-          <pre>Model: {{inputInvitedUsers | json}}</pre>
+          <!-- <pre>Model: {{inputInvitedUsers | json}}</pre> -->
         </div>
 
         <div class="form-group">
           <label for="openToAnyoneFlag">Open to anyone: </label>
-          <input type="checkbox" ng-model="openToAnyoneFlag">
+          <input type="checkbox" ng-model="storyInfoEdit.openToAnyoneFlag">
         </div>
 
       </div>
@@ -77,20 +77,42 @@
 </div>
 
         <h1>{{story.title}}</h1>
+        <h4>Story Idea:</h4>
         <p>{{story.idea}}</p>
-        <p>
-          {{storyTagsForReadOnlyDisplay()}}
-        </p>
-        <p>
-          {{invitedUsersReadOnlyDisplay()}}
-        </p>
+        <h4>Tags:</h4>
+        <div class="storyTags" ng-repeat="storyTag in story.tags">
+          {{'#'+storyTag}}
+        </div>
+        <div class="clear"></div>
+        <h4>Invited Users:</h4>
+        <div ng-repeat="(invitedUserId, invitedUser) in story.invitedUsers">
+          <div class="invitedUserName">
+            {{invitedUser}}
+            <span ng-if="invitedUserAccepted(invitedUserId)"
+              class="invitedUserAccepted">ACCEPTED
+            </span>
+            <span ng-if="invitedUserDeclined(invitedUserId)"
+              class="invitedUserDeclined">DECLINED
+            </span>
+          </div>
+        </div>
+        <div class="openToAnyone" ng-if="story.openToAnyoneFlag">Open To Anyone</div>
+
+        <!-- <ul class="invitedUserList">
+          <li ng-repeat="(invitedUserId, invitedUser) in story.invitedUsers">
+            <div class="invitedUserName">{{invitedUser}}</div>
+            <span ng-if="invitedUserAccepted(invitedUserId)"
+              class="invitedUserAccepted">accepted
+            </span>
+          </li>
+        </ul> -->
 
       </div>
     </div>
 
     <!-- <div ng-show="isEditingStoryInfo" class="editingStoryInfo0">
     </div> -->
-
+    <div class="clear"></div>
     <div class="storyListItemLinks">
       <div ng-if="signedIn() && story.userUid === currentUser().uid">
 

@@ -185,6 +185,7 @@ body {
 }
 .storyListItemLinks {
   margin-left: 0;
+  margin-top: 20px;
   padding-left: 0;
 }
 .storyListItemLinks li {
@@ -194,6 +195,54 @@ body {
   padding-right: 20px;
   // padding-left: 0px;
   // margin-left: 0px;
+  margin-top: 20px;
+}
+// .invitedUserList {
+//   margin: 0;
+//   padding: 0;
+// }
+// .invitedUserList li {
+//   list-style-type: none;
+//   display: inline-block;
+// }
+
+.storyTags {
+  //padding-right: 20px;
+  color: #000;
+  background-color: #fff;
+  padding: 5px;
+  @include border-radius(5px);
+  display: inline-block;
+  margin: 0 5px 0 0;
+  float:left;
+}
+.openToAnyone {
+  color: #fff;
+  background-color: #1d6310;
+  padding: 5px;
+  @include border-radius(5px);
+  display: inline-block;
+  margin: 0 5px 0 0;
+  float: left;
+}
+.invitedUserName {
+  //padding-right: 20px;
+  color: #fff;
+  background-color: #111;
+  padding: 5px;
+  @include border-radius(5px);
+  display: inline-block;
+  margin: 0 5px 0 0;
+  float:left;
+}
+.invitedUserAccepted {
+  color: green;
+}
+.invitedUserDeclined {
+  color: red;
+}
+.clear {
+  clear: both;
 }
 .addToStory {
   background-color: #c2cbdc;

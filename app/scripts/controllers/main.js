@@ -120,11 +120,19 @@ angular.module('storyApp')
       return 'search by tags';
     };
     $scope.searchByFilter = function( story ) {
+      var searchKey = $scope.storySearchFields.searchStories.toLowerCase();
       if ( $scope.storySearchFields.searchBy === 'title' ) {
-        return story.title.toLowerCase().indexOf( $scope.storySearchFields.searchStories.toLowerCase() ) !== -1;
+        return story.title.toLowerCase().indexOf( searchKey ) !== -1;
       } else {
         // by tag
-        return story.tags.toLowerCase().indexOf( $scope.storySearchFields.searchStories.toLowerCase() ) !== -1;
+        // return story.tags.toLowerCase().indexOf( $scope.storySearchFields.searchStories.toLowerCase() ) !== -1;
+        var foundMatch = false;
+        angular.forEach( story.tags, function(tag) {
+          if ( tag.indexOf(searchKey) !== -1 ) {
+            foundMatch = true;
+          }
+        });
+        return foundMatch;
       }
     };
     $scope.storyFilter2 = function( story ) {

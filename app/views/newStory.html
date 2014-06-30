@@ -5,7 +5,7 @@
 <form name="storyBasicInfo" ng-submit="saveStoryIdea()">
 
 <div class="form-group">
-  <label for='title'>Story Title:</label>
+  <h1><label for='title'>Story Title:</label></h1>
   <input type="text" id='title' name='title' class="form-control"
     placeholder="enter story title here"
     ng-model="story.title"
@@ -15,7 +15,7 @@
 
 
 <div class="form-group">
-<label for="idea">Idea or Theme:</label>
+<h4><label for="idea">Idea or Theme:</label></h4>
 <textarea class="form-control" rows="3"
   id="idea" name="idea"
   placeholder="enter some description of the idea or theme for this story"
@@ -39,7 +39,8 @@
 </div> -->
 
 <div class="form-group">
-  <tags-input ng-model="inputTags" class="bootstrapTagInput" add-on-space=true add-from-autocomplete-only=false>
+  <h4><label for="inputTags">Tags:</label></h4>
+  <tags-input ng-model="inputTags" name="inputTags" class="bootstrapTagInput" add-on-space=true add-from-autocomplete-only=false>
     <auto-complete source="loadTags($query)" min-length=1></auto-complete>
   </tags-input>
   <!-- <pre>Model: {{inputTags | json}}</pre>
@@ -47,7 +48,8 @@
 </div>
 
 <div class="form-group">
-  <tags-input ng-model="inputInvitedUsers" class="bootstrapTagInput" placeholder="Invite a user"
+  <h4><label for="inputInvitedUsers">Invited Users:</label></h4>
+  <tags-input ng-model="inputInvitedUsers" name="inputInvitedUsers" class="bootstrapTagInput" placeholder="Invite a user"
     add-from-autocomplete-only=true
     replace-spaces-with-dashes=false >
 
@@ -59,7 +61,7 @@
 
 <div class="form-group">
   <label for="openToAnyoneFlag">Open to anyone: </label>
-  <input type="checkbox" ng-model="openToAnyoneFlag">
+  <input type="checkbox" ng-model="story.openToAnyoneFlag">
 </div>
 
 <div class="btn-group btn-group-justified">

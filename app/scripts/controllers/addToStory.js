@@ -53,13 +53,13 @@ angular.module('storyApp')
         $scope.storyInfoEdit.invitedUsers = invitedUsers;
       }
     });
-  $scope.invitedUsersReadOnlyDisplay = function() {
-    var invitedUsers = [];
-    angular.forEach( story.invitedUsers, function( invitedUser ) {
-      invitedUsers.push( invitedUser );
-    });
-    return invitedUsers.join(' ');
-  };
+  // $scope.invitedUsersReadOnlyDisplay = function() {
+  //   var invitedUsers = [];
+  //   angular.forEach( story.invitedUsers, function( invitedUser ) {
+  //     invitedUsers.push( invitedUser );
+  //   });
+  //   return invitedUsers.join(' ');
+  // };
 
   //$scope.story.title = $stateParams.storyTitle;
   $scope.nextStoryContentItem = {text: ''};
@@ -75,7 +75,7 @@ angular.module('storyApp')
 
   $scope.editStory = function() {
     $scope.isEditingStoryInfo = true;
-    $scope.storyInfoEdit = {title:$scope.story.title, idea:$scope.story.idea, tags:$scope.story.tags};
+    $scope.storyInfoEdit = {title:$scope.story.title, idea:$scope.story.idea, tags:$scope.story.tags, openToAnyoneFlag:$scope.story.openToAnyoneFlag};
 
     var inputTags = [];
     angular.forEach( story.tags, function(tag) {
@@ -149,5 +149,8 @@ angular.module('storyApp')
   //   idea: '',
   //   tags: ''
   // };
+  $scope.invitedUserAccepted = function(userId) {
+    return StoryService.userStoryStatusIsAccepted(storyId, userId);
+  };
 
 });

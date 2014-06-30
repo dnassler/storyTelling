@@ -26,7 +26,7 @@ angular.module('storyApp')
       });
     };
 
-    $scope.loginPassword = function(cb) {
+    $scope.loginPassword = function() {
       $scope.err = null;
       if( !$scope.email ) {
         $scope.err = 'Please enter an email address';
@@ -37,8 +37,10 @@ angular.module('storyApp')
       else {
         simpleLogin.loginPassword($scope.email, $scope.pass, function(err, user) {
           $scope.err = err? err + '' : null;
-          if( !err && cb ) {
-            cb(user);
+          if( !err ) {
+            //cb(user);
+            console.log('login controller: user = ',user);
+            $state.go('inbox');
           }
         });
       }
