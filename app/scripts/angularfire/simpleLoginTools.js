@@ -49,6 +49,7 @@ angular.module('simpleLoginTools', [])
     subs.push($rootScope.$on('$firebaseSimpleLogin:login', fn));
     subs.push($rootScope.$on('$firebaseSimpleLogin:logout', fn));
     subs.push($rootScope.$on('$firebaseSimpleLogin:error', fn));
+    console.log('simpleLoginTools waitForAuth setup $firebase events');
     return def.promise;
   })
 
