@@ -152,5 +152,12 @@ angular.module('storyApp')
   $scope.invitedUserAccepted = function(userId) {
     return StoryService.userStoryStatusIsAccepted(storyId, userId);
   };
+  $scope.isUsersTurn = function(userId) {
+    if ( !storyId || !userId ) {
+      return false;
+    }
+    return StoryService.isUsersTurn( storyId, userId );
+  };
+
 
 });

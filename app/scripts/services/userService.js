@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('storyApp')
-  .factory('UserService', function( syncData, filterFilter, $q ) {
+  .factory('UserService', function( syncData, filterFilter, $q, $rootScope ) {
 
     var users = syncData('users');
 
@@ -41,7 +41,8 @@ angular.module('storyApp')
         //var userListArr = users.$getIndex();
 
         var userListArr = [];
-
+        var usersMatching = {};
+        query = query.toLowerCase();
         angular.forEach( users.$getIndex(), function( userId ) {
           var userDisplayName;
           var user = users[userId];
@@ -58,15 +59,29 @@ angular.module('storyApp')
           } else {
             userDisplayName = user.uid;
           }
-          userListArr.push( {text:userDisplayName, userId:userId} );
+          if ( userDisplayName.toLowerCase().indexOf( query ) !== -1 ) {
+
+            var p = '';
+            if ( usersMatching[userDisplayName] ) {
+              p = user.provider ? ' ('+user.provider+')' : ' (storyHive)';
+            }
+            usersMatching[userDisplayName] = userDisplayName;
+            userListArr.push( {text:userDisplayName + p, userId:userId} );
+          }
         });
-        var filtered = filterFilter( userListArr, query );
+        var filtered = userListArr;//filterFilter( userListArr, query );
         var d = $q.defer();
         d.resolve( filtered );
         return d.promise;
       }
 
-
     };
+    $rootScope.userAvatarURL = function(userId) {
+      return factory.userAvatarURL(userId);
+    };
+    $rootScope.userDisplayName = function(userId) {
+      return factory.userDisplayName(userId);
+    };
+
     return factory;
   });

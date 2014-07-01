@@ -20,13 +20,16 @@
     There are no stories in your inbox! So sad.
   </p>
 </div>
-<div ng-show="hasStoriesInInbox" class="storyListItem" ng-repeat="storyItem in storiesInbox | orderByPriority | orderBy:'$id':true" >
+<div ng-show="hasStoriesInInbox" class="storyListItem"
+  ng-class="{userTurn:isUsersTurn(storyItem.$id), inBoxStoryFinished:isFinished(storyItem.$id)}"
+  ng-repeat="storyItem in storiesInbox | orderByPriority | orderBy:'$id':true" >
+
   <h2>{{storyItem.title}}</h2>
   <p>
     {{storyItem.idea}}
   </p>
 
-  <div ng-if="signedIn() && storyItem.userUid !== currentUser().uid">
+  <!-- <div ng-if="signedIn() && storyItem.userUid !== currentUser().uid"> -->
     <ul class="storyListItemLinks">
       <li><a ng-click="storyClicked(storyItem.$id)">view</a></li>
       <li>
@@ -39,15 +42,14 @@
       </li>
       <li><a ng-click="dismissStoryFromInbox(storyItem.$id)">dismiss</a></li>
     </ul>
-  </div>
+  <!-- </div> -->
 
-  <div ng-if="signedIn() && storyItem.userUid === currentUser().uid">
+  <!-- <div ng-if="signedIn() && storyItem.userUid === currentUser().uid">
     <ul class="storyListItemLinks">
       <li><a ng-click="storyClicked(storyItem.$id)">view</a></li>
-      <!-- <li><a ng-click="deleteStory(storyItem.$id)">delete</a></li> -->
       <li><a ng-click="dismissStoryFromInbox(storyItem.$id)">dismiss</a></li>
     </ul>
-  </div>
+  </div> -->
 
 </div>
 

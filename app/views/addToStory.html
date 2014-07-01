@@ -86,7 +86,7 @@
         <div class="clear"></div>
         <h4>Invited Users:</h4>
         <div ng-repeat="(invitedUserId, invitedUser) in story.invitedUsers">
-          <div class="invitedUserName">
+          <div class="invitedUserName" ng-class="{userTurnLabel:isUsersTurn(invitedUserId), userNotTurnLabel:!isUsersTurn(invitedUserId)}">
             {{invitedUser}}
             <span ng-if="invitedUserAccepted(invitedUserId)"
               class="invitedUserAccepted">ACCEPTED

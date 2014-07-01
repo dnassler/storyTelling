@@ -1,5 +1,12 @@
 <div class="header container">
   <ul class="nav nav-pills pull-right">
+    <li ng-show="signedIn()">
+      <div class="storyIdeaBy">
+        <!-- {{story.userUid}} -->
+        <div ng-if="userAvatarURL(currentUser().uid)"><img ng-src="{{userAvatarURL(currentUser().uid)}}"/></div>
+        <div>{{userDisplayName(currentUser().uid)}}</div>
+      </div>
+    </li>
     <li ui-sref-active="active" ng-show="signedIn()"><a ui-sref="inbox">Inbox</a></li>
     <li ui-sref-active="active"><a ui-sref="main">Main</a></li>
     <li ui-sref-active="active" ng-show="signedIn()"><a ui-sref="newStory">New Story</a></li>

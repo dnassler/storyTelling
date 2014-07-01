@@ -213,7 +213,10 @@ angular.module('storyApp')
       },
 
       isUsersTurn: function( storyId, userId ) {
-        var story = factory.getStory( storyId );
+        var story = storiesSync[storyId];
+        if ( factory.isFinished(story) ) {
+          return false;
+        }
         if ( story.status && story.status.waitingForUser && story.status.waitingForUser === userId ) {
           return true;
         }

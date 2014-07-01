@@ -70,6 +70,17 @@ angular.module('storyApp')
       StoryService.dismissStoryFromInbox( storyId, user.uid );
     };
 
+    $scope.isUsersTurn = function( storyId ) {
+      if ( !storyId ) {
+        return false;
+      }
+      var user = $rootScope.currentUser();
+      return StoryService.isUsersTurn( storyId, user.uid );
+    };
+    $scope.isFinished = function( storyId ) {
+      return StoryService.isFinished( $scope.storiesInbox[storyId] );
+    };
+
     // function populateInbox() {
     //   angular.forEach($scope.user.posts, function(postId) {
     //     $scope.posts[postId] = Post.find(postId);

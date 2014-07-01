@@ -183,6 +183,24 @@ body {
   margin: 20px;
   @include border-radius(25px);
 }
+.userTurn {
+  background-color: #e3dd72;
+}
+.userTurnLabel {
+  border: 5px solid #e3dd72;
+  margin-top:0px;
+
+}
+.userNotTurnLabel {
+  //border: 5px solid #000;
+  margin-top: 5px;
+}
+.inBoxStoryFinished {
+  // background-color: #3276d1;
+  background-color: #343535;
+  color: white;
+
+}
 .storyListItemLinks {
   margin-left: 0;
   margin-top: 20px;
@@ -232,7 +250,10 @@ body {
   padding: 5px;
   @include border-radius(5px);
   display: inline-block;
-  margin: 0 5px 0 0;
+  //margin: 5px 5px 0 0;
+  margin-right: 5px;
+  margin-bottom: 0;
+  margin-left: 0;
   float:left;
 }
 .invitedUserAccepted {
