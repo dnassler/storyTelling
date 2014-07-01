@@ -26,12 +26,15 @@ angular.module('angularfire.login', ['firebase', 'angularfire.firebase'])
         console.log('auth = ', auth);
         $rootScope.$on('$firebaseSimpleLogin:login', function() {
           console.log('$firebaseSimpleLogin:login event from login service init');
+          $rootScope.simpleLoginFirstEventFired = true;
         });
         $rootScope.$on('$firebaseSimpleLogin:logout', function() {
           console.log('$firebaseSimpleLogin:logout event from login service init');
+          $rootScope.simpleLoginFirstEventFired = true;
         });
         $rootScope.$on('$firebaseSimpleLogin:error', function() {
           console.log('$firebaseSimpleLogin:error event from login service init');
+          $rootScope.simpleLoginFirstEventFired = true;
         });
         return auth;
       },
