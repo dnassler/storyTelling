@@ -39,6 +39,7 @@ angular
       })
       .state('login', {
         templateUrl: 'views/login.html',
+        url: '/login',
         controller: 'LoginController'
       })
       ;
