@@ -64,6 +64,7 @@ angular.module('simpleLoginTools', [])
       var _compile = directive.compile;
       directive.compile = function(element, attr) {
         waitForAuth.then(function() {
+          console.log('ngCloadDirective waitForAuth.then was called...');
           // after auth, run the original ng-cloak directive
           _compile.call(directive, element, attr);
         });
@@ -130,10 +131,13 @@ angular.module('simpleLoginTools', [])
         var expState = getExpectedState(scope, attr.ngShowAuth);
         assertValidStates(expState);
         function fn() {
+          console.log('ngShowAuth in fn()... loginState=',loginState,', expState=',expState);
           var show = inList(loginState, expState);
+          console.log('ngShowAuth show=',show);
           // sometimes if ngCloak exists on same element, they argue, so make sure that
           // this one always runs last for reliability
           setTimeout(function() {
+            console.log('ngShowAuth timeout ng-cloak toggle class');
             el.toggleClass('ng-cloak', !show);
           }, 0);
         }
