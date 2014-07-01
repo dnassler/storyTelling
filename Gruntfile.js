@@ -15,8 +15,25 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  var pkg = require('./package.json');
   // Define the configuration for all the tasks
   grunt.initConfig({
+
+    buildcontrol: {
+      options: {
+        dir: "dist",
+        commit: true,
+        push: true,
+        message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
+      },
+      heroku: {
+        options: {
+          remote: 'git@heroku.com:calm-hollows-7201.git',
+          branch: 'master',
+          tag: pkg.version
+        }
+      }
+    },
 
     // Project settings
     yeoman: {
@@ -307,7 +324,10 @@ module.exports = function (grunt) {
             '*.html',
             'views/{,*/}*.html',
             'images/{,*/}*.{webp}',
-            'fonts/*'
+            'fonts/*',
+            'package.json',
+            'server.js',
+            'Procfile'
           ]
         }, {
           expand: true,
@@ -374,7 +394,7 @@ module.exports = function (grunt) {
     }
   });
 
-
+  grunt.loadNpmTasks('grunt-build-control');
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
