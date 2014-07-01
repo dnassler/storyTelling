@@ -31,12 +31,16 @@ angular.module('simpleLoginTools', [])
  */
   .service('waitForAuth', function($rootScope, $q, $timeout) {
     function fn(err) {
+      console.log('waitForAuth service fn() err=',err);
       if($rootScope.auth) {
+        console.log('waitForAuth auth');
         $rootScope.auth.error = err instanceof Error? err.toString() : null;
       }
+      console.log('waitForAuth before for loop');
       for(var i=0; i < subs.length; i++) { subs[i](); }
       $timeout(function() {
         // force $scope.$apply to be re-run after login resolves
+        console.log('waitForAuth timeout about to resolve');
         def.resolve();
       });
     }
